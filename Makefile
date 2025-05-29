@@ -1,6 +1,6 @@
 CXX             =   c++
 
-INCLUDES		= 	includes
+INCLUDES		= 	includes/lib
 
 CXXFLAGS        =   -Wall -Wextra -Werror -MMD -MP -I$(INCLUDES) -g3 -fsanitize=address
 
