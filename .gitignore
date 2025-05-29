@@ -1,0 +1,13 @@
+# Compiled source #
+__bin__
+__build__
+.cache
+compile_commands.json
+.vscode
+logs
+
+# object files and dependencies #
+**/*.o
+**/*.d
+
+# other #
