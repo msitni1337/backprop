@@ -57,6 +57,16 @@ Matrix<T>& Matrix<T>::operator*(const Matrix& rhs) const
     return result;
 }
 template <class T>
+Matrix<T>& Matrix<T>::operator+=(const Matrix& rhs)
+{
+    if (_rows != rhs._rows || _cols != rhs._cols)
+        throw std::runtime_error("Invalid matrix sum: matrices have different dimensions");
+    for (size_t row = 0; row < _rows; row++)
+        for (size_t col = 0; col < _cols; col++)
+            MatrixValue(row, col) += rhs.MatrixValue(row, col);
+    return *this;
+}
+template <class T>
 T& Matrix<T>::MatrixValue(const size_t& row, const size_t& col)
 {
     return _buffer[(row * _cols) + col];

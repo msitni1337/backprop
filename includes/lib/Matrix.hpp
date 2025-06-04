@@ -20,8 +20,9 @@ public:
 
 public:
     Matrix&  operator*(const Matrix& rhs) const;
-    T&       MatrixValue(const size_t& row, const size_t& col);
-    const T& MatrixValue(const size_t& row, const size_t& col) const;
+    Matrix&  operator+=(const Matrix& rhs);
+    inline T&       MatrixValue(const size_t& row, const size_t& col);
+    inline const T& MatrixValue(const size_t& row, const size_t& col) const;
 
 private:
     void AllocateBuffer();
