@@ -1,4 +1,5 @@
 #include <cstring>
+#include <iomanip>
 #include <stdexcept>
 
 namespace backprop
@@ -19,12 +20,22 @@ public:
     ~Matrix();
 
 public:
-    Matrix&  operator*(const Matrix& rhs) const;
-    Matrix&  operator+=(const Matrix& rhs);
-    inline T&       MatrixValue(const size_t& row, const size_t& col);
-    inline const T& MatrixValue(const size_t& row, const size_t& col) const;
+    Matrix& operator*(const Matrix& rhs) const;
+    Matrix& operator+=(const Matrix& rhs);
+
+public:
+    inline T&            MatrixValue(const size_t& row, const size_t& col);
+    inline const T&      MatrixValue(const size_t& row, const size_t& col) const;
+    inline const size_t& GetCols() const;
+    inline const size_t& GetRows() const;
+
+public:
+    void Randomize(T low, T high);
 
 private:
     void AllocateBuffer();
 };
+
+template <class T>
+std::ostream& operator<<(std::ostream& out, const Matrix<T>& m);
 } // namespace backprop

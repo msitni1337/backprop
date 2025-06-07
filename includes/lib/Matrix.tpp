@@ -76,4 +76,38 @@ const T& Matrix<T>::MatrixValue(const size_t& row, const size_t& col) const
 {
     return _buffer[(row * _cols) + col];
 }
+template <class T>
+const size_t& Matrix<T>::GetCols() const
+{
+    return _cols;
+}
+template <class T>
+const size_t& Matrix<T>::GetRows() const
+{
+    return _rows;
+}
+template <class T>
+void Matrix<T>::Randomize(T low, T high)
+{
+    for (size_t row = 0; row < _rows; row++)
+        for (size_t col = 0; col < _cols; col++)
+            MatrixValue(row, col) = ((T)rand() / RAND_MAX) * (high - low) + low;
+}
+
+template <class T>
+std::ostream& operator<<(std::ostream& out, const Matrix<T>& m)
+{
+    const size_t& rows = m.GetRows();
+    const size_t& cols = m.GetCols();
+    out << "======\n";
+    for (size_t row = 0; row < rows; row++)
+    {
+        out << "#  ";
+        for (size_t col = 0; col < cols; col++)
+            out << std::setprecision(6) << m.MatrixValue(row, col) << "  ";
+        out << "  #\n";
+    }
+    out << "======" << std::endl;
+    return out;
+}
 } // namespace backprop
