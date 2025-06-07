@@ -20,7 +20,7 @@ public:
     ~Matrix();
 
 public:
-    Matrix& operator*(const Matrix& rhs) const;
+    Matrix operator*(const Matrix& rhs) const;
     Matrix& operator+=(const Matrix& rhs);
 
 public:

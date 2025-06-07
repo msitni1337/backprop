@@ -39,19 +39,20 @@ void Matrix<T>::AllocateBuffer()
     _buffer_size = _rows * _cols;
     _buffer      = new T[_buffer_size];
 }
+// TODO: this returns a copy Urghhhhh please think of a better solution!
 template <class T>
-Matrix<T>& Matrix<T>::operator*(const Matrix& rhs) const
+Matrix<T> Matrix<T>::operator*(const Matrix& rhs) const
 {
     if (_cols != rhs._rows)
         throw std::runtime_error("Invalid matrix dot product: this->cols dont match rhs.rows");
     Matrix result(_rows, rhs._cols);
-    for (size_t row = 0; row < result.rows; row++)
+    for (size_t row = 0; row < result._rows; row++)
     {
         for (size_t col = 0; col < result._cols; col++)
         {
             T& value = result.MatrixValue(row, col);
             for (size_t i = 0; i < _cols; i++)
-                *value += MatrixValue(row, i) * rhs.MatrixValue(i, col);
+                value += MatrixValue(row, i) * rhs.MatrixValue(i, col);
         }
     }
     return result;
