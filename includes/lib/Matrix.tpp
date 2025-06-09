@@ -1,3 +1,4 @@
+#pragma once
 #include "Matrix.hpp"
 
 namespace backprop
@@ -68,13 +69,24 @@ Matrix<T>& Matrix<T>::operator+=(const Matrix& rhs)
     return *this;
 }
 template <class T>
+void Matrix<T>::Fill(const T& value)
+{
+    for (size_t row = 0; row < _rows; row++)
+        for (size_t col = 0; col < _cols; col++)
+            MatrixValue(row, col) = value;
+}
+template <class T>
 T& Matrix<T>::MatrixValue(const size_t& row, const size_t& col)
 {
+    if (row >= _rows || col >= _cols)
+        throw std::runtime_error("index out of bound");
     return _buffer[(row * _cols) + col];
 }
 template <class T>
 const T& Matrix<T>::MatrixValue(const size_t& row, const size_t& col) const
 {
+    if (row >= _rows || col >= _cols)
+        throw std::runtime_error("index out of bound");
     return _buffer[(row * _cols) + col];
 }
 template <class T>
@@ -105,7 +117,8 @@ std::ostream& operator<<(std::ostream& out, const Matrix<T>& m)
     {
         out << "#  ";
         for (size_t col = 0; col < cols; col++)
-            out << std::setprecision(6) << m.MatrixValue(row, col) << "  ";
+            out << std::setprecision(6) << std::left << std::setw(12) << m.MatrixValue(row, col)
+                << "  ";
         out << "  #\n";
     }
     out << "======" << std::endl;
